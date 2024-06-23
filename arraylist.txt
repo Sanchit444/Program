@@ -1,0 +1,53 @@
+// Online C# Editor for free
+// Write, Edit and Run your C# code using C# Online Compiler
+
+using System;
+using System.Collections;
+public class Student{
+    public string Name;
+    public string RollNo;
+    public string Branch;
+    public int Marks;
+    public Student(string name, string rollNo, string branch, int marks)
+    {
+        Name = name;
+        RollNo = rollNo;
+        Branch = branch;
+        Marks = marks;
+    }
+    public static void Addstudent(ArrayList l, Student obj)
+    {
+        l.Add(obj);
+    }
+    public static void Displaystudent(ArrayList l)
+    {
+        foreach(Student i in l)
+        {
+            Console.WriteLine($"Name: {i.Name} RollNo : {i.RollNo} Branch : {i.Branch} Marks: {i.Marks}" );
+        }
+    }
+}
+public class StudentComparer : IComparer
+{
+    public int Compare(object x, object y)
+    {
+        Student s1 = (Student)x;
+        Student s2 = (Student)y;
+        return s1.Name.CompareTo(s2.Name);
+    }
+}
+public class HelloWorld
+{
+    public static void Main(string[] args)
+    {
+        
+        ArrayList l = new ArrayList();
+        Student s1 = new Student("Sanchit","1","CMPN",90);
+        Student s2 = new Student("ABC","1","CMPN",90);
+        Student.Addstudent(l,s1);
+        Student.Addstudent(l,s2);
+        Student.Displaystudent(l);
+        l.Sort(new StudentComparer());
+        Student.Displaystudent(l);
+    }
+}
