@@ -1,0 +1,90 @@
+// Online C# Editor for free
+// Write, Edit and Run your C# code using C# Online Compiler
+
+using System;
+
+using System.Collections.Generic;
+public class Node{
+   public int coeff; 
+    public int pow; 
+    public Node(int a, int b) 
+    { 
+        coeff = a; 
+        pow = b; 
+    }
+    public static void AddNode(LinkedList<Node> l,Node obj)
+    {
+        l.AddLast(obj);
+    }
+    public static LinkedList<Node> AddList(LinkedList<Node> l1,LinkedList<Node> l2)
+    {
+        
+     LinkedList<Node> result = new LinkedList<Node>();
+
+        var node1 = l1.First;
+        var node2 = l2.First;
+
+        while (node1 != null || node2 != null)
+        {
+            if (node1 == null)
+            {
+                AddNode(result, new Node(node2.Value.coeff, node2.Value.pow));
+                node2 = node2.Next;
+            }
+            else if (node2 == null)
+            {
+                AddNode(result, new Node(node1.Value.coeff, node1.Value.pow));
+                node1 = node1.Next;
+            }
+            else if (node1.Value.pow == node2.Value.pow)
+            {
+                AddNode(result, new Node(node1.Value.coeff + node2.Value.coeff, node1.Value.pow));
+                node1 = node1.Next;
+                node2 = node2.Next;
+            }
+            else if (node1.Value.pow > node2.Value.pow)
+            {
+                AddNode(result, new Node(node1.Value.coeff, node1.Value.pow));
+                node1 = node1.Next;
+            }
+            else
+            {
+                AddNode(result, new Node(node2.Value.coeff, node2.Value.pow));
+                node2 = node2.Next;
+            }
+        }
+
+        return result;
+    }
+    
+}
+
+    
+public class HelloWorld
+{
+    public static void Main(string[] args)
+    {
+       LinkedList<Node> l = new LinkedList<Node>();
+       Node n1 = new Node(3,2);
+       Node n2 = new Node(3,1);
+       Node n3 = new Node(2,0);
+       Node.AddNode(l,n1);
+         Node.AddNode(l,n2);
+          Node.AddNode(l,n3);
+          LinkedList<Node> l2 = new LinkedList<Node>();
+       Node m1 = new Node(4,3);
+       Node m2 = new Node(3,1);
+       Node m3 = new Node(2,0);
+       Node.AddNode(l2,m1);
+         Node.AddNode(l2,m2);
+          Node.AddNode(l2,m3);
+          LinkedList<Node> l3 = Node.AddList(l,l2);
+          var temp = l3.First; 
+        while (temp != null) { 
+            Console.Write(temp.Value.coeff + "x^" + temp.Value.pow); 
+            if (temp.Next != null) 
+                Console.Write(" + "); 
+            temp = temp.Next; 
+        } 
+    }
+}
