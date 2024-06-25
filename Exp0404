@@ -1,0 +1,51 @@
+using System;
+using System.Collections.Generic;
+using System.Runtime.Intrinsics.Arm;
+public class Find
+{
+public void Intersect( HashSet<int>s1, HashSet<int>s2)
+{
+    Console.WriteLine("Intersection:");
+    foreach(int i in s1)
+    {
+        if(s2.Contains(i))
+        Console.WriteLine(i);
+    }
+}
+public void Union( HashSet<int>s1, HashSet<int>s2)
+{
+    Console.WriteLine("Union:");
+    foreach(int i in s1)
+    {
+        Console.WriteLine(i);
+    }
+    foreach(int i in s2)
+    {
+        if(!s1.Contains(i))
+        Console.WriteLine(i);
+    }
+}
+public void ExceptWith(HashSet<int>s1,HashSet<int>s2)
+{
+    Console.WriteLine("Union:");
+    foreach(int i in s1)
+    {
+        if(!s2.Contains(i))
+        Console.WriteLine(i);
+    }
+}
+
+}
+class Exp
+{
+    static void Main(String[] args)
+    {
+       HashSet<int>s1 = new HashSet<int>{1,2,3,4,5,7,8};
+       HashSet<int>s2 = new HashSet<int>{5,7,8,9,10};
+        Find f = new Find();
+        f.Intersect(s1,s2);
+        f.Union(s1,s2);
+        f.ExceptWith(s1,s2);
+
+    }
+}

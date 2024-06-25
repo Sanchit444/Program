@@ -1,0 +1,104 @@
+using System;
+using System.Collections;
+public class Node {
+    public int val;
+    public Node left, right;
+    public Node(int data)
+    {
+        val = data;
+        left = null;
+        right = null;
+    }
+}
+public class BST
+{
+public  Node Insert(Node root, int d)
+    {
+    if(root==null)
+    {
+        root = new Node(d);
+       return root;
+    }
+    if(d>root.val)
+    {
+        root.right = Insert(root.right,d);
+    }
+    else root.left = Insert(root.left,d);
+    return root;
+}
+
+    public static int Count(Node root)
+    {
+        if (root == null)
+            return 0;
+
+        return 1 + Count(root.left) + Count(root.right);
+    }
+    public static int CountLeaf(Node root)
+    {
+         if (root == null)
+            return 0;
+        if(root.left == null && root.right == null)
+        return 1;
+        return CountLeaf(root.left) + CountLeaf(root.right);
+    }
+    public static void Inorder(Node root)
+    {
+        if(root!=null)
+        {
+            Inorder(root.left);
+           Console.Write(root.val + " ");
+           Inorder(root.right);
+        }
+    }
+     public static void Preorder(Node root)
+    {
+        if(root!=null)
+        {
+           Console.Write(root.val + " ");
+           Preorder(root.left);
+           Preorder(root.right);
+        }
+    }
+    public static void Postorder(Node root)
+    {
+        if(root!=null)
+        {
+           Postorder(root.left);
+           Postorder(root.right);
+           Console.Write(root.val + " ");
+        }
+    }
+}
+class Expt{
+    static void Main(String[] args)
+     {  
+     Node root = null;
+    BST b1 = new BST();
+   root =  b1.Insert(root,5);
+    b1.Insert(root,7);
+    b1.Insert(root,8);
+    b1.Insert(root,4);
+    b1.Insert(root,2);
+    if(BST.SearchRec(root,3))
+    {
+        Console.WriteLine("Value is found");
+    }
+    else{
+        Console.WriteLine("Value is not found");
+    }
+    Console.WriteLine($"Total nodes are {BST.Count(root)}");
+    Console.WriteLine($"Total leaf nodes are {BST.CountLeaf(root)}");
+    Console.WriteLine($"Inorder:");
+    BST.Inorder(root);
+    Console.WriteLine();
+    Console.WriteLine($"Preorder:");
+    BST.Preorder(root);
+    Console.WriteLine();
+    Console.WriteLine($"Postorder:");
+    BST.Postorder(root);
+}
+
+}
+
+

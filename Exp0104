@@ -1,0 +1,36 @@
+using System;
+public class Dist
+{
+    public static double Distance(double x1, double x2, double y1, double y2)
+    {
+        return (Math.Sqrt(Math.Pow((x2 - x1), 2) + Math.Pow((y2 - y1), 2)));
+    }
+}
+
+class Exp
+{
+    public static void Main(String[] args)
+    {
+        Console.WriteLine("Enter x coordinate");
+        double x1 = Convert.ToDouble(Console.ReadLine());
+        double x2 = Convert.ToDouble(Console.ReadLine());
+        double x3 = Convert.ToDouble(Console.ReadLine());
+        Console.WriteLine("Enter y coordinate");
+        double y1 = Convert.ToDouble(Console.ReadLine());
+        double y2 = Convert.ToDouble(Console.ReadLine());
+         double y3 = Convert.ToDouble(Console.ReadLine());
+        double d1 = Dist.Distance(x1, x2, y1, y2);
+        double d2 = Dist.Distance(x2, x3, y2, y3);
+        double d3 = Dist.Distance(x1, x3, y1, y3);
+        double p = d1+d2+d3;
+        double s = p/2;
+        double area = Math.Sqrt(s * (s - d1) * (s - d2) * (s - d3));
+        if(area == 0){
+        double length = d1+d2;
+        Console.WriteLine("Segment length is" + length);
+        }
+        else Console.WriteLine("Area is:"+area);
+    }
+}
+
+

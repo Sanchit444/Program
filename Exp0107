@@ -1,0 +1,32 @@
+using System;
+
+class Perf
+{
+    public static bool Perfect(double num)
+    {
+        double val = 1;
+        for(int i=2;i<num;i++)
+        {
+            if(num%i == 0)
+            val += i;
+        }
+        if(val == num)
+        return true;
+        return false;
+    }
+}
+class Exp
+{
+    public static void Main(String[] args)
+    {    Console.WriteLine("Enter n value");
+        double n = Convert.ToDouble(Console.ReadLine());
+        for(int i=2;i<=n;i++)
+        {
+            if(Perf.Perfect(i))
+            Console.WriteLine(i);2
+        }
+    }
+}
+
+
+

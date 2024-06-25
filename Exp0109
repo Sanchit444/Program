@@ -1,0 +1,32 @@
+using System;
+
+class Rev
+{   
+    public static int ReverseNum(int n)
+{
+    int reverse = 0;
+      while (n != 0)
+        {
+            int r = n % 10;
+            reverse = reverse * 10 + r;
+            n /= 10;
+        }
+        return reverse;
+}
+    }
+
+class Exp
+{
+    public static void Main(String[] args)
+    {    
+        Console.WriteLine("Enter n value");
+        int n = Convert.ToInt32(Console.ReadLine());
+       int rev = Rev.ReverseNum(n);
+       if(n== rev)
+       Console.WriteLine("Number is palindrome");
+       else Console.WriteLine("Number is not palindrome");
+        }
+    }
+
+
+

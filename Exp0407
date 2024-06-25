@@ -1,0 +1,59 @@
+using System;
+using System.Collections.Generic;
+public class Search
+{
+    public static void IndexSearch(int[] arr,int n,int k)
+    {
+        int[] ele = new int[10];
+        int[] indice = new int[10];
+        int i=0,set=0;
+        int ind=0,start=0,end=0,j=0;
+        for(i=0;i<n;i+=4)
+        {
+            ele[ind]=arr[i];
+            indice[ind]=arr[i];
+            ind++;
+        }
+        if (k < ele[0]) {
+        Console.Write("Not found");
+        return; 
+    }
+    else
+    {
+        for(i=0;i<=ind;i++)
+        {
+            if (k <= ele[i]) {
+                start = indice[i - 1];
+                  set = 1;
+                end = indice[i];
+                break;
+        }
+    }
+
+    }
+    if(set == 0)
+    {
+        Console.WriteLine("Not Found");
+        return;
+    }
+    for (i = start; i <= end; i++) {
+        if (k == arr[i]) {
+            j = 1;
+            break;
+        }
+    }
+     if (j == 1)
+        Console.WriteLine("Found at index "+ i);
+    else
+        Console.WriteLine("Not found");
+    }
+}
+class Exp
+{
+    static void Main(String[] args)
+    {
+       int[] arr={1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20};
+       int k = 7;
+       Search.IndexSearch(arr,10,k);
+    }
+}

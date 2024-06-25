@@ -1,0 +1,29 @@
+using System;
+using System.Collections;
+
+class Expt{
+    static void Main(String[] args)
+     {  
+      string text = Console.ReadLine();
+      string pattern = Console.ReadLine();
+      int j = 0;
+      for(int i=0;i<text.Length;i++)
+      {
+         if(text[i]==pattern[j])
+         {
+            int ind = i;
+            while(j<pattern.Length && i<text.Length && text[i] == pattern[j] )
+            {
+               j++;
+               i++;
+            }
+            i = ind;
+            if(j==pattern.Length)
+            Console.WriteLine("Pattern found at "+ ind);
+            j=0;
+         }
+      }
+}
+}
+
+

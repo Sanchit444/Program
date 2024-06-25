@@ -1,0 +1,28 @@
+using System;
+
+class Sw
+{   
+    public static void Swap(ref int a, ref int b)
+{
+    int c = a;
+    a = b;
+    b=c;
+}
+    }
+
+class Exp
+{
+     public static void Main(String[] args)
+    { 
+  Console.WriteLine("Enter value of a");
+  int a = Convert.ToInt32(Console.ReadLine());
+  Console.WriteLine("Enter value of b");
+  int b = Convert.ToInt32(Console.ReadLine());
+    Sw.Swap(ref a,ref b);
+    Console.WriteLine("a:" + a);
+    Console.WriteLine("b: "+ b);
+    }
+}
+
+
+

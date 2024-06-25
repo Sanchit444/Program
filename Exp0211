@@ -1,0 +1,64 @@
+using System;
+using System.Collections;
+
+class Mul{
+   public static int[,] Multiplication(int[,]mat1,int[,]mat2,int m1,int n1,int m2,int n2)
+   {
+      int [,]result = new int[m1,n2];
+      for(int i=0;i<m1;i++)
+      {
+         for(int j=0;j<n2;j++)
+         {
+            result[i,j]=0;
+            for(int k=0;k<n1;k++)
+            {
+               result[i,j]+= mat1[i,k]*mat2[k,j];
+            }
+         }
+      }
+      return result;
+   }
+   
+}
+class Expt{
+    static void Main(String[] args)
+     {  
+      int m1 = Convert.ToInt32(Console.ReadLine());
+      int n1 = Convert.ToInt32(Console.ReadLine());
+      int m2 = Convert.ToInt32(Console.ReadLine());
+      int n2 = Convert.ToInt32(Console.ReadLine());
+      Console.WriteLine("Enter value for first matrix");
+      int [,]mat1 = new int[m1,n1];
+      for(int i =0;i<m1;i++)
+      {
+         for(int j=0;j<n1;j++)
+         {
+            mat1[i,j]=Convert.ToInt32(Console.ReadLine());
+
+         }
+      }
+      Console.WriteLine("Enter value for second matrix");
+      int [,]mat2 = new int[m1,n1];
+      for(int i =0;i<m2;i++)
+      {
+         for(int j=0;j<n2;j++)
+         {
+            mat2[i,j]=Convert.ToInt32(Console.ReadLine());  
+         }
+      }
+      int[,] result = Mul.Multiplication(mat1,mat2,m1,n1,m2,n2);
+      for(int i=0;i<m1;i++)
+      {
+         for(int j=0;j<n2;j++)
+         {
+            Console.Write(result[i,j]+" ");
+         }
+         Console.WriteLine();
+      }
+
+         }
+      }
+
+
+
+

@@ -1,0 +1,99 @@
+public class Node{
+public int coeff;
+public int pow;
+public Node next;
+public Node(int a, int b)
+{
+  coeff = a;
+  pow = b;
+  next = null;
+}
+}
+class Poly { 
+    public  Node Add(Node p1, Node p2) 
+    { 
+       Node a = p1, b = p2, newHead = new Node(0, 0), 
+             c = newHead;
+             while (a != null || b != null) { 
+  
+            if (a == null) { 
+                c.next = b; 
+                break; 
+            } 
+            if(b==null)
+            {
+              c.next = a;
+              break;
+            }
+            else if (a.pow == b.pow) { 
+                c.next = new Node(a.coeff + b.coeff, a.pow); 
+  
+                a = a.next; 
+                b = b.next; 
+            } 
+            else if (a.pow > b.pow) { 
+                c.next = new Node(a.coeff, a.pow); 
+  
+                a = a.next; 
+            } 
+  
+            else if (a.pow < b.pow) { 
+                c.next = new Node(b.coeff, b.pow); 
+  
+                b = b.next; 
+            } 
+  
+            c = c.next; 
+        } 
+return newHead.next;    
+    }
+    
+}
+
+class LL{
+   public static void Main(String[] args)
+    {
+      Node s1 = null;
+      Node cur1 = null;
+      Node  s2 = null;
+        Node  cur2 = null;
+        int[] coeff1 = { 2, 7, 2 }; 
+        int[] pow1 = { 2, 1, 0 }; 
+        int[] coeff2 = { 4, 3, 2 }; 
+        int[] pow2 = { 2, 1, 0 }; 
+        int n = coeff1.Length;
+        int m = coeff2.Length; 
+      
+        for (int i = 0; i < coeff1.Length; i++) { 
+            Node node = new Node(coeff1[i], pow1[i]);
+            if (s1 == null) {
+                s1 = node;
+                cur1 = node;
+            } else {
+                cur1.next = node;
+                cur1 = cur1.next;
+            }
+        }
+     for (int j = 0; j < coeff2.Length; j++) { 
+            Node node = new Node(coeff2[j], pow2[j]);
+            if (s2 == null) {
+                s2 = node;
+                cur2 = node;
+            } else {
+                cur2.next = node;
+                cur2 = cur2.next;
+            }
+        }
+    Poly obj = new Poly();
+     Node sum = obj.Add(s1, s2); 
+  
+        Node val = sum; 
+        while (val != null) { 
+            Console.Write(val.coeff + "x^" + val.pow); 
+            if (val.next != null) 
+                Console.Write(" + "); 
+          val = val.next; 
+        } 
+        Console.WriteLine();
+}
+}

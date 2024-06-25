@@ -1,0 +1,32 @@
+using System;
+using System.Collections;
+
+class Expt{
+    static void Main(String[] args)
+     {  
+      List<int>s = new List<int>();
+      List<int>t = new List<int>();
+      int n = Convert.ToInt32(Console.ReadLine());
+      int m = Convert.ToInt32(Console.ReadLine());
+      for(int i=0;i<n;i++)
+      {
+        s.Add(Convert.ToInt32(Console.ReadLine()));
+      }
+      for(int j=0;j<m;j++)
+      {
+        t.Add(Convert.ToInt32(Console.ReadLine()));
+      }
+      var intersection = s.Intersect(t);
+      var union = s.Union(t);
+      Console.WriteLine("Intersection:");
+        foreach (var i in intersection)
+        {
+            Console.WriteLine(i);
+        }
+        Console.WriteLine("Union:");
+        foreach (var i in union)
+        {
+            Console.WriteLine(i);
+        }
+}
+}

@@ -1,0 +1,51 @@
+
+class Expt{
+    static void Main(String[] args)
+     {  
+     Console.WriteLine("Enter n value: ");
+     int n = Convert.ToInt32(Console.ReadLine());
+      int [] arr = new int[n];
+      for(int i=0;i<n;i++)
+      {
+         arr[i]= Convert.ToInt32(Console.ReadLine());
+      }
+   Array.Sort(arr);
+   int mode = -1; 
+    int curr_count = 1; 
+    int max_count = 1; 
+    bool flag = false;
+    for(int i=1;i<n;i++)
+      {
+         if(arr[i]==arr[i-1])
+         curr_count++;
+         else{
+            if(curr_count == max_count)
+            flag = false;
+            else 
+            {
+               if(curr_count>max_count){
+                max_count = curr_count;
+               mode = arr[i-1];
+               flag = true;
+               }
+            }
+            curr_count = 1;
+         }
+      }
+          if(curr_count == max_count)
+            flag = false;
+            else 
+            {
+               if(curr_count>max_count){
+                max_count = curr_count;
+               mode = arr[n-1];
+               flag = true;
+               }
+            }  
+      if(flag)
+      Console.WriteLine("Mode value is "+mode);
+     else Console.WriteLine("Mode is not present");
+   
+
+     }
+}

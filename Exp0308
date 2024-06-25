@@ -1,0 +1,46 @@
+using System;
+using System.Collections;
+
+class Bin{
+public static  string  Binary(int n)
+{
+  string s = "";
+  while(n!=0)
+  {
+    if((n&1) == 1)
+    {
+      s = s+"1";
+    }
+    else {
+       s = s+"0";
+    }
+    n = n/2;
+  }
+  return s;
+}
+}
+class Exp
+{
+    public static void Main(String[] args)
+    {
+      int n = Convert.ToInt32(Console.ReadLine());
+      
+    for(int i=1;i<=n;i++)
+    {
+      Queue<string> q = new Queue<string>();
+      string str = Bin.Binary(i);
+      q.Enqueue(str);
+      foreach (string v in q)
+        {
+            Console.WriteLine(v);
+        }
+        }
+        
+      }
+}
+     
+      // Console.WriteLine("Parentheses are continuous");
+    
+
+
+

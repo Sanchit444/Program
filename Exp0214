@@ -1,0 +1,34 @@
+
+class Expt{
+    static void Main(String[] args)
+     {  
+      Console.WriteLine("Enter number of rows: ");
+     int m = Convert.ToInt32(Console.ReadLine());
+      Console.WriteLine("Enter number of column: ");
+     int n = Convert.ToInt32(Console.ReadLine());
+     int [,] mat1 = new int[m,n];
+     int [,] result = new int[n,m];
+      for(int i=0;i<m;i++)
+      {
+         for(int j=0;j<n;j++)
+         {
+            mat1[i,j]= Convert.ToInt32(Console.ReadLine());
+         }
+      }
+      for(int i=0;i<n;i++)
+      {
+         for(int j=0;j<m;j++)
+         {
+           result[i,j] = mat1[j,i];
+         }
+      }
+      for(int i=0;i<n;i++)
+      {
+         for(int j=0;j<m;j++)
+         {
+            Console.Write(result[i,j]+" ");
+         }
+         Console.WriteLine();
+      }
+     }
+}

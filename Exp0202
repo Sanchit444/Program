@@ -1,0 +1,27 @@
+using System;
+class Expt{
+    static void Main(String[] args)
+     {
+        Console.WriteLine("Enter n valuet:");
+        int  n = Convert.ToInt32(Console.ReadLine());
+        int[] arr= new int[n];
+        for(int i=0;i<n;i++)
+        {
+arr[i]= Convert.ToInt32(Console.ReadLine());   
+     }
+    int sum = 0;
+     for(int i=0;i<n;i++)
+        {
+         sum+=arr[i];
+        }
+        double mean = sum / n;
+      double sumofsquare = 0;
+         for(int i=0;i<n;i++)
+        {
+         sumofsquare += Math.Pow((arr[i]-mean),2);
+        }
+        double var = sumofsquare / n;
+        Console.WriteLine(Math.Sqrt(var));
+}
+}
+

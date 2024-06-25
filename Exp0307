@@ -1,0 +1,60 @@
+using System;
+using System.Collections;
+class St{
+  ArrayList l = new ArrayList();
+  int top = -1;
+   public  void Push(char i) 
+   {
+    l.Add(i);
+    top++;
+   }
+   public void Pop()
+   {
+    if(top == -1)
+     Console.WriteLine("Stack overflow");
+    else{
+ top--;
+    }
+   }
+   public char Peek()
+   {
+    if(top == -1){
+    Console.WriteLine("Stack is empty");
+    return '0';
+    }
+    else
+    {
+return l[top].ToString().ToCharArray()[0];
+
+    } 
+   }
+}
+class Exp
+{
+    public static void Main(String[] args)
+    {
+      string s = Console.ReadLine();
+      St st = new St();
+      int i;
+      for(i=0;i<s.Length;i++)
+      {
+        if(s[i]=='(')
+        st.Push(s[i]);
+        else {
+            if(st.Peek()!='('){
+            Console.WriteLine("Parentheses are not continuous");
+            break;
+            }
+            else {
+                st.Pop();
+            }
+        }
+      }
+      if(i!=s.Length)
+       Console.WriteLine("Parentheses are not continuous");
+       else Console.WriteLine("Parentheses are continuous");
+      // Console.WriteLine("Parentheses are continuous");
+    }
+}
+
+

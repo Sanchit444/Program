@@ -1,0 +1,60 @@
+using System;
+
+class Add{
+   public static int [,] Addition(int[,]mat1,int[,]mat2)
+   {
+      int r = mat1.GetLength(0);
+      int c = mat1.GetLength(1);
+      int[,]  result= new int[r,c];
+      for(int i=0;i<r;i++)
+      {
+         for(int j=0;j<c;j++)
+         {
+            result[i,j] = mat1[i,j] + mat2[i,j];
+         }
+      }
+      return result;
+   }
+   
+}
+class Expt{
+    static void Main(String[] args)
+     {  
+     Console.WriteLine("Enter number of rows: ");
+     int m = Convert.ToInt32(Console.ReadLine());
+      Console.WriteLine("Enter number of column: ");
+     int n = Convert.ToInt32(Console.ReadLine());
+    int [,] mat1 = new int[m,n];
+      Console.WriteLine("First Matrix: ");
+      for(int i=0;i<m;i++)
+      {
+         for(int j=0;j<n;j++)
+         {
+            mat1[i,j]= Convert.ToInt32(Console.ReadLine());
+         }
+      }
+      int [,] mat2 = new int[m,n];
+      Console.WriteLine("Second Matrix: ");
+      for(int i=0;i<m;i++)
+      {
+         for(int j=0;j<n;j++)
+         {
+            mat2[i,j]= Convert.ToInt32(Console.ReadLine());
+         }
+      }
+
+   int [,] result = new int[m,n];
+   result = Add.Addition(mat1,mat2);
+   for(int i=0;i<m;i++)
+   {
+      for(int j=0;j<n;j++)
+      {
+         Console.Write(result[i,j]+" ");
+      }
+      Console.WriteLine();
+   }
+   }
+}
+
+
+

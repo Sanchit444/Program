@@ -1,0 +1,99 @@
+using System;
+using System.Collections;
+public class Songs {
+   public string Name;
+   public string Creator;
+   public string Dateofcreation;
+   public string Lastupdate;
+   LinkedList<string>L;
+   public Songs(string name,string creator,string dateofcreation, string lastupdate, LinkedList<string>l)
+   {
+    Name = name;
+    Creator = creator;
+    Dateofcreation = dateofcreation;
+    Lastupdate = lastupdate;
+    L = l;
+   }
+   public static void AddSong(LinkedList<Songs>l,Songs s)
+   {
+    l.AddLast(s);
+   }
+   public static void DeletePlaylist(LinkedList<Songs>l,string s)
+   {
+    foreach(Songs i in l)
+    {
+        if(i.Name == s)
+        l.Remove(i);
+    }
+   }
+   public static void AddSong(LinkedList<Songs>l,string p,string s)
+   {
+    foreach(Songs i in l)
+    {
+        if(i.Name == p)
+        {
+            i.L.AddLast(s);
+        }
+    }
+   }
+   public static void AddAfterSong(LinkedList<Songs>l,string p,string s1,string s2)
+   {
+    foreach(Songs i in l)
+    {
+        // if(i.Name == p)
+        // {
+        //    foreach(string i in i.)
+        // }
+    }
+   }
+   public static void DeleteSong(LinkedList<Songs>l, string p,string s)
+   {
+    foreach(Songs i in l)
+    {
+        if(i.Name == p)
+        {
+            i.L.Remove(s);
+        }
+    }
+   }
+   public static void DisplayPlayList(LinkedList<Songs>l)
+   {
+    foreach(Songs i in l)
+    {
+        {
+            Console.WriteLine($"Playlist name: {i.Name}");
+            foreach(string j in i.L)
+            {
+                Console.WriteLine($"Songs:{j}");
+            }
+        }
+    }
+   }
+   public static void DisplayAllSong(LinkedList<Songs>l, string p)
+   {
+    foreach(Songs i in l)
+    {
+        if(i.Name == p)
+        {
+            foreach(string j in i.L)
+            {
+                Console.WriteLine($"{j}");
+            }
+        }
+    }
+   }
+}
+
+class Expt{
+    static void Main(String[] args)
+     {  
+        LinkedList<Songs> L = new LinkedList<Songs>();
+        Songs s1 = new Songs("")
+        
+    }
+    
+}
+
+
+
+
