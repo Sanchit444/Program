@@ -1,0 +1,123 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
+public class PassPort{
+    public string passport;
+    public string name;
+    public string address;
+    public string contact;
+    public string country ;
+    public string blood;
+    public PassPort(string passport,string name,string address,string contact,string country,string blood)
+    {
+        this.passport = passport;
+        this.name = name;
+        this.address = address;
+        this.contact = contact;
+        this.country = country;
+        this.blood = blood;
+    }
+}
+public class Person
+{
+    Hashtable h1 = new Hashtable();
+    public void AddNewPerson(string passport,string name,string address,string contact,string country,string blood) 
+    {
+        PassPort p = new PassPort(passport,name,address,contact,country,blood);
+        h1.Add(passport,p);
+    }
+    public void FindPersonWithPassportNo(string passport)
+    {
+        if(h1.ContainsKey(passport))
+        {
+            
+        }
+    } 
+    public void AddFlight(string flightId,string source,string destination,DateTime arrival,DateTime departure,int journeytime, double ticketcos,int flightcapacity,int totalbooked)
+    {
+        Flight obj = new Flight(flightId,source,destination,arrival,departure,journeytime,ticketcos,flightcapacity,totalbooked);
+        f.Add(flightId,obj);
+    }
+    public void RemoveFlight(string flightId)
+    {
+         if (f.ContainsKey(flightId))
+        {
+            f.Remove(flightId);
+            Console.WriteLine($"Flight {flightId} removed successfully.");
+        }
+        else{
+            Console.WriteLine($"Flights not found");
+        }
+    }
+    public void BookTicketsByFlightId(string flightId,int ticket)
+    {
+        if(f.ContainsKey(flightId))
+        {
+            Flight obj = f[flightId];
+            obj.totalbooked+=ticket;
+        }
+    }
+    public void UpdateFlightCapacity(string flightId,int flightcapacity)
+    {
+        if(f.ContainsKey(flightId))
+        {
+            Flight obj = f[flightId];
+            obj.flightcapacity=flightcapacity;
+        }
+    }
+    public void  UpdateFlightArrival(string flightId,DateTime newarrival)
+    {
+         if(f.ContainsKey(flightId))
+         {
+            Flight obj = f[flightId];
+            obj.arrival = newarrival;
+         }
+    }
+    public void UpdateFilghtDeparture(string flightId, DateTime newdeparture)
+    {
+       if(f.ContainsKey(flightId))
+         {
+            Flight obj = f[flightId];
+            obj.departure = newdeparture;
+         }
+    }
+    public void GetAllFlightsWithGivenSource(string source)
+    {
+        foreach(var i in f.Values)
+        {
+            if(i.source == source)
+            {
+                Console.WriteLine($"{i.flightId}");
+            }
+        }
+    }
+    public void GetAllFlightsWithArrivalDateRange(DateTime startdate, DateTime enddate)
+    {
+        foreach(var i in f.Values)
+        {
+            if(i.arrival>= startdate && i.arrival<= enddate)
+            {
+                Console.WriteLine($"{i.flightId}");
+            }
+        }
+    }
+    public void FindReminaingCapacity(string flightId)
+    {
+        if(f.ContainsKey(flightId))
+        {
+            int r = f[flightId].flightcapacity;
+            Console.WriteLine($"Remaining Capacity:{r}");
+        }
+    }
+}
+class Exp
+{
+    static void Main(String[] args)
+    {
+        FlightManage obj1 = new FlightManage();
+        obj1.AddFlight("F1","Mumbai","Delhi", new DateTime(2024, 7, 1, 10, 0, 0), new DateTime(2024, 7, 1, 14, 0, 0), 6,500,50,40);
+         obj1.AddFlight("F2","Rajkot","Pune", new DateTime(2024, 7, 1, 9, 0, 0), new DateTime(2024, 7, 1, 13, 0, 0), 6,500,40,30);
+         obj1.GetAllFlightsWithGivenSource("Mumbai");
+    }
+}
