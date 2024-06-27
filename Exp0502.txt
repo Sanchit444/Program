@@ -1,0 +1,123 @@
+using System;
+using System.Collections;
+using System.Linq;
+public class Customer
+{
+    private static int idCounter = 1;
+    public int CustomerID { get; private set; }
+    public string Name { get; set; }
+    public int Age { get; set; }
+    public string Mobile { get; set; }
+    public string Location { get; set; }
+    public Customer(string name,int age,string mobile,string location)
+    {
+        CustomerID = idCounter++;
+        Name = name;
+        Age = age;
+        Mobile = mobile;
+        Location = location;
+    }
+    public override string ToString()
+    {
+        return $"ID: {CustomerID}, Name: {Name}, Age: {Age}, Mobile: {Mobile}, Location: {Location}";
+    }
+}
+public class CustomerIdComparer : IComparer
+{
+    public int Compare(object x, object y)
+    {
+        return ((Customer)x).CustomerID.CompareTo(((Customer)y).CustomerID);
+    }
+}
+
+public class CustomerNameComparer : IComparer
+{
+    public int Compare(object x, object y)
+    {
+        return ((Customer)x).Name.CompareTo(((Customer)y).Name);
+    }
+}
+
+public class CustomerLocationThenNameComparer : IComparer
+{
+    public int Compare(object x, object y)
+    {
+        var customer1 = (Customer)x;
+        var customer2 = (Customer)y;
+        int result = customer1.Location.CompareTo(customer2.Location);
+        if (result == 0)
+        {
+            result = customer1.Name.CompareTo(customer2.Name);
+        }
+        return result;
+    }
+}
+public class CustomerRepo
+    {
+    private Customer[]c;
+    private int ind=0;
+    public CustomerRepo(int n)
+    {
+        c = new Customer[n];
+    }
+    public void AddCustomer(string name,int age,string mobile,string location)
+    {
+        c[ind] = new Customer(name,age,mobile,location);
+        ind++;
+    }
+    public void RemoveCustomer(int customerID)
+    {
+        int index = 0;
+        for(int i=0;i<ind;i++)
+        {
+            if(c[i].CustomerID == customerID)
+            {
+                index = i;
+            }
+        }
+        for (int i = index; i < ind - 1; i++)
+            {
+                c[i] = c[i + 1];
+            }
+        c[--ind] = null;
+    }
+    public void SortCustomersById()
+    {
+        Array.Sort(c, 0, ind, new CustomerIdComparer());
+    }
+
+    public void SortCustomersByName()
+    {
+        Array.Sort(c, 0, ind, new CustomerNameComparer());
+    }
+
+    public void SortByLocationThenByName()
+    {
+        Array.Sort(c, 0, ind, new CustomerLocationThenNameComparer());
+    }
+    public void PrintAllCustomers()
+    {
+        for (int i = 0; i < ind; i++)
+        {
+            Console.WriteLine(c[i]);
+        }
+    }
+    }
+class Expt
+{
+    public static void Main(String[] args)
+    {
+        CustomerRepo C1 = new CustomerRepo(5);
+        CustomerRepo C2 = new CustomerRepo(5);
+        C1.AddCustomer("Sanchit", 21, "1234567890", "Ghansoli");
+        C1.AddCustomer("San", 22, "123456789", "Airoli");
+        C2.AddCustomer("Sanchit", 21, "1234567890", "Ghansoli");
+        //C1.PrintAllCustomers();
+       // C2.PrintAllCustomers();
+        C1.AddCustomer("abc", 20, "1234567890", "Ghansoli");
+        //C1.SortCustomersByName();
+        C1.SortByLocationThenByName();
+        C1.PrintAllCustomers();
+        
+    }
+}
