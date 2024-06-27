@@ -1,0 +1,95 @@
+using System;
+using System.Collections;
+using System.Linq;
+public class Myarray{
+    private int[] arr;
+    public Myarray(int[] array)
+   {
+       arr = new int[array.Length];
+       Array.Copy(array,arr,array.Length);
+   }
+    public override string ToString()
+    {
+        return $"[{string.Join(", ", arr)}]";
+    }
+     public double FindMean()
+    {
+        return arr.Average();
+    }
+    public double FindMedian()
+    {
+        var sortedArray = arr.OrderBy(n => n).ToArray();
+        int size = sortedArray.Length;
+        int mid = size / 2;
+
+        if (size % 2 == 0)
+        {
+            return (sortedArray[mid - 1] + sortedArray[mid]) / 2.0;
+        }
+        else
+        {
+            return sortedArray[mid];
+        }
+    }
+    public void RemoveDuplicates()
+    {
+        arr = arr.Distinct().ToArray();
+    }
+    public void RotateLeft(int k)
+    {
+        while(k>0)
+        {
+            int val = arr[0];
+            for(int i=1;i<arr.Length;i++)
+            {
+                arr[i-1] = arr[i];
+            }
+            arr[arr.Length-1] = val;
+            k--;
+        }
+       
+    }
+    public void RotateRight(int k)
+    {
+         while(k>0)
+        {
+            int val = arr[arr.Length-1];
+            for(int i=arr.Length-1;i>0;i--)
+            {
+                arr[i] = arr[i-1];
+            }
+            arr[0] = val;
+            k--;
+        }
+    }
+    public bool CompareArrays(Myarray otherArray)
+    {
+        return arr.SequenceEqual(otherArray.arr);
+    }
+    public double CalculateStandardDeviation(int[] arr)
+    {
+        double mean = arr.Average();
+        double sumOfSquaresOfDifferences = arr.Select(val => (val - mean) * (val - mean)).Sum();
+        return Math.Sqrt(sumOfSquaresOfDifferences / arr.Length);
+    }
+    public int CompareByStandardDeviation(Myarray other)
+    {
+        double stdDev1 = CalculateStandardDeviation(arr);
+        double stdDev2 = CalculateStandardDeviation(other.arr);
+        if (stdDev1 < stdDev2) return -1;
+        if (stdDev1 > stdDev2) return 1;
+        return 0;
+    }
+}
+class Expt
+{
+    public static void Main(String[] args)
+    {
+        int []a = new int[11]{2,3,4,5,7,7,8,9,10,1,11};
+       Myarray arr = new Myarray(a);
+       Console.WriteLine(arr.FindMean());
+       Console.WriteLine(arr.FindMedian());
+       arr.RotateLeft(3);
+        Console.WriteLine(arr);
+    }
+}
