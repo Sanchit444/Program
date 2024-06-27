@@ -1,0 +1,138 @@
+using System;
+using System.Collections;
+using System.Linq;
+public class MyMatrix{
+     private int[,] matrix;
+    private int rows;
+    private int cols;
+    public MyMatrix(int[,] mat)
+   {
+       rows = mat.GetLength(0);
+       cols = mat.GetLength(1);
+       matrix = new int[rows,cols];
+       Array.Copy(mat,matrix,mat.Length);
+   }
+    public override string ToString()
+    {
+        string result = "";
+        for (int i = 0; i < rows; i++)
+        {
+            for (int j = 0; j < cols; j++)
+            {
+                result += matrix[i, j] + " ";
+            }
+            result += "\n";
+        }
+        return result;
+    }
+    public void Addition(MyMatrix other)
+    {
+         int[,] resultMatrix = new int[rows, cols];
+        for (int i = 0; i < rows; i++)
+        {
+            for (int j = 0; j < cols; j++)
+            {
+                resultMatrix[i, j] = matrix[i, j] + other.matrix[i, j];
+            }
+        }
+        Console.WriteLine(new MyMatrix(resultMatrix));
+    }
+    public void Multiplication(MyMatrix other)
+    {
+        int[,] resultMatrix = new int[rows, other.cols];
+        for (int i = 0; i < rows; i++)
+        {
+            for (int j = 0; j < other.cols; j++)
+            {
+                for (int k = 0; k < cols; k++)
+                {
+                    resultMatrix[i, j] += matrix[i, k] * other.matrix[k, j];
+                }
+            }
+        }
+        Console.WriteLine(new MyMatrix(resultMatrix));
+    }
+    public void Transpose()
+    {
+        int [,]result = new int[rows,cols];
+        for(int i=0;i<rows;i++)
+        {
+            for(int j=0;j<cols;j++)
+            {
+                result[j,i]=matrix[i,j]; 
+            }
+        }
+    }
+    public bool IsSymmetric()
+    {
+        if (rows != cols)
+        {
+            return false;
+        }
+
+        for (int i = 0; i < rows; i++)
+        {
+            for (int j = 0; j < cols; j++)
+            {
+                if (matrix[i, j] != matrix[j, i])
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    public int[] FindSumOfEachRow()
+    {
+        int[] rowSums = new int[rows];
+        for (int i = 0; i < rows; i++)
+        {
+            int sum = 0;
+            for (int j = 0; j < cols; j++)
+            {
+                sum += matrix[i, j];
+            }
+            rowSums[i] = sum;
+        }
+        return rowSums;
+    }
+     public int[] FindSumOfEachColumn()
+    {
+        int[] colSums = new int[cols];
+        for (int i = 0; i < cols; i++)
+        {
+            int sum = 0;
+            for (int j = 0; j < rows; j++)
+            {
+                sum += matrix[j, i];
+            }
+            colSums[i] = sum;
+        }
+        return colSums;
+    }
+     
+}
+class Expt
+{
+    public static void Main(String[] args)
+    {
+                int[,] matrix1Data = {
+            {1, 2, 3},
+            {4, 5, 6},
+            {7, 8, 9}
+        };
+
+        int[,] matrix2Data = {
+            {9, 8, 7},
+            {6, 5, 4},
+            {3, 2, 1}
+        };
+        MyMatrix matrix1 = new MyMatrix(matrix1Data);
+        MyMatrix matrix2 = new MyMatrix(matrix2Data);
+        matrix1.Addition(matrix2);
+        matrix1.Multiplication(matrix2);
+
+
+
+    }
+}
