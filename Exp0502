@@ -1,0 +1,45 @@
+using System;
+using System.Collections;
+using System.ComponentModel.DataAnnotations.Schema;
+public class Complex{
+    public double real{get;set;}
+    public double imaginary{get;set;}
+    public Complex(double real,double imaginary)
+    {
+        this.real = real;
+        this.imaginary = imaginary;
+    }
+    public override string ToString()
+    {
+        return $"Complex Number: {AccountNumber}, TypeofTransaction: {TypeofTransaction}, Amount: {Amount}, transactiondate: {transactiondate}";
+    }
+    public void Addition(Complex obj)
+    {
+        Console.WriteLine(new Complex(real+obj.real,imaginary+obj.imaginary));
+    }   
+     public void Subtraction(Complex obj)
+    {
+        Console.WriteLine(new Complex(real-obj.real,imaginary-obj.imaginary));
+    }
+    public void Multiplication(Complex obj)
+    {
+        double newReal = real * obj.real - imaginary * obj.imaginary;
+        double newImaginary = real * obj.imaginary + imaginary * obj.real;
+        Console.WriteLine(new Complex(newReal, newImaginary));
+    }
+    public void Division(Complex obj)
+    {
+        double denominator = obj.real * obj.real + obj.imaginary * obj.imaginary;
+        double newReal = (real * obj.real + imaginary * obj.imaginary) / denominator;
+        double newImaginary = (imaginary * obj.real - real * obj.imaginary) / denominator;
+        Console.WriteLine(new Complex(newReal, newImaginary));
+    }
+    public void Modulus()
+    {
+        Console.WriteLine(Math.Sqrt(real*real + imaginary*imaginary));
+    } 
+    public void Interchange()
+    {
+        Console.WriteLine(new Complex(imaginary,real));
+    }
+}
