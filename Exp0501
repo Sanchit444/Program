@@ -1,0 +1,82 @@
+using System;
+using System.Collections.Generic;
+public class Transaction
+{
+   public int TransactionID; 
+public int AccountNumber; 
+public string TypeofTransaction; 
+public double Amount; 
+public DateTime transactiondate;
+public Transaction(int TransactionID,int AccountNumber,string TypeofTransaction,double amount,DateTime transactiondate) 
+{
+    this.TransactionID = TransactionID;
+    this.AccountNumber = AccountNumber;
+    this.TypeofTransaction = TypeofTransaction;
+    this.Amount = Amount;
+    this.transactiondate = transactiondate;
+} 
+
+     public override string ToString()
+    {
+        return $"TransactionID: {TransactionID}, AccountNumber: {AccountNumber}, TypeofTransaction: {TypeofTransaction}, Amount: {Amount}, transactiondate: {transactiondate}";
+    }
+}
+
+public class TransactionRepo
+{
+    private List<Transaction>L = new List<Transaction>();
+    
+    public void AddNewTransaction(int TransactionID,int AccountNumber,string TypeofTransaction,double amount,DateTime transactiondate)
+    {
+        Transaction t = new Transaction(TransactionID,AccountNumber,TypeofTransaction,amount,transactiondate);
+        L.Add(t);
+        
+    }
+    public void  DeleteTransaction(int TransactionID)
+    {
+        foreach(Transaction t in L)
+        {
+            if(t.TransactionID == TransactionID)
+            {
+                L.Remove(t);
+            }
+        }
+    }
+    public void  DisplayAllTransactionsWithDateRange(int AccountNumber,DateTime start,DateTime end)
+    {
+        foreach(Transaction t in L)
+        {
+            if(t.AccountNumber == AccountNumber)
+            {
+                if(t.transactiondate>=start && t.transactiondate<=end)
+                {
+                    Console.WriteLine(t);
+                }
+            }
+        }
+    }
+    public void GetTransactionWithId(int TransactionID)
+    {
+        foreach(Transaction t in L)
+        {
+            if(t.TransactionID == TransactionID)
+            {
+                Console.WriteLine(t);
+            }
+        }
+    }
+    // Display top n employees with highest salaries
+}
+class Exp{
+    static void Main(String[] args)
+    {
+       TransactionRepo t = new TransactionRepo();
+       t.AddNewTransaction(1, 123,"Deposit" ,10000, new DateTime(2024,6,10));
+       t.AddNewTransaction(2,124,"Withdrawl",20000)
+       e.AddNewEmployee(2, "ABC", new DateTime(1990, 5, 15), "9876543210", 5, "50000");
+    //    e.TopNSalaries(1);
+     e.AddNewEmployee(3, "ABD", new DateTime(1990, 5, 15), "9876543210", 5, "60000");
+     e.DisplayAllEmployeesByExperience(5);
+     e.TopNSalaries(2);
+    }
+}
