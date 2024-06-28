@@ -1,0 +1,126 @@
+// See https://aka.ms/new-console-template for more information
+using System;
+using System.Collections;
+class Account
+{
+    public int AccountNumber{get;set;}
+    public string Name{get;set;}
+    public DateOnly Dateofbirth{get;set;}
+    public int Currbalance{get;set;}
+    public static int Minbalance = 1000;
+    public Account(int accountnumber,string name,DateOnly dateofbirth,int amount)
+    {
+        AccountNumber = accountnumber;
+        Name = name;
+        Dateofbirth = dateofbirth;
+        Currbalance = amount;
+    }
+    public override string ToString()
+    {
+        return $"AccountNumber : {AccountNumber} Name : {Name} Dateofbirth : {Dateofbirth} Currbalance : {Currbalance}";
+    }
+}
+public class AccountRepo
+{
+   private List<Account>L;
+   public AccountRepo()
+   {
+    L = new List<Account>();
+   }
+   public void AddNewAccount(int accountnumber,string name,DateOnly dateofbirth,int amount)
+   {
+    if(amount>Account.Minbalance){
+    Account a = new Account(accountnumber,name,dateofbirth,amount);
+    L.Add(a);
+    }
+    else{
+        Console.WriteLine("Amount is less than minimum balance");
+    }
+   }
+   public void DeleteAccount(int accountnumber)
+   {
+    foreach(var i in L)
+    {
+        if(i.AccountNumber == accountnumber)
+        {
+            L.Remove(i);
+        }
+    }
+   }
+   public void GetAllAccounts()
+   {
+    foreach(Account a in L)
+    {
+        Console.WriteLine(a);
+    }
+   }
+   public void Deposit(int accountnumber,int amount)
+   {
+    foreach(var i in L)
+    {
+        if(i.AccountNumber == accountnumber)
+        {
+            i.Currbalance+=amount;
+        }
+    }
+   }
+   public void Withdraw(int accountnumber,int amount)
+   {
+    foreach(var i in L){
+        if(i.AccountNumber == accountnumber)
+        {
+            if(i.Currbalance-amount >= Account.Minbalance)
+            {
+                i.Currbalance-=amount;
+            }
+            else{
+                Console.WriteLine("Need to maintain minimum balance amount");
+            }
+        }
+    }
+   }
+   public void TransferMoney(int amount,int accountfrom ,int accountto)
+   {
+    foreach(var i in L)
+    {
+        if(i.AccountNumber == accountfrom)
+        {
+             if(i.Currbalance-amount >= Account.Minbalance)
+            {
+                foreach(var j in L)
+            {
+                if(i.AccountNumber == accountto)
+                {
+                    
+                    i.Currbalance-= amount;
+                    j.Currbalance-=amount;
+                }
+               
+            }
+            } 
+            else{
+                Console.WriteLine("Need to maintain minimum balance amount");
+            }
+        }
+    }
+   }
+}
+class Expt
+{
+    public static void Main(String[] args)
+    {
+
+    
+    AccountRepo a = new AccountRepo();
+    a.AddNewAccount(123,"Sanchit",new DateOnly(2003,06,10),20000);
+    a.AddNewAccount(1234,"abc",new DateOnly(2004,06,10),10000);
+    //a.GetAllAccounts();
+    a.Deposit(123,1000);
+    // a.GetAllAccounts();
+     a.Withdraw(123,20000);
+     a.GetAllAccounts();
+     a.Withdraw(123,1);
+    }
+}
+
+
