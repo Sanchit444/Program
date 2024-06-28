@@ -1,0 +1,89 @@
+using System;
+public class Shape
+{
+public double Dimension1 { get; set; }
+    public double Dimension2 { get; set; }
+    public Shape(double dimension1,double dimension2)
+    {
+        Dimension1 = dimension1;
+        Dimension2 = dimension2;
+    }
+   public virtual double FindArea()
+   {
+    return Dimension1 * Dimension2;
+   }
+}
+public class Circle:Shape
+{
+    public Circle(double radius):base(radius,0)
+    {}   
+    public override double FindArea()
+   {
+    return Math.PI*Dimension1*Dimension2;
+   }
+}
+public class Rectangle : Shape
+{
+    public Rectangle(double length, double width) : base(length, width) {}
+}
+public class Triangle : Shape
+{
+    public Triangle(double baseLength, double height) : base(baseLength, height) { }
+
+    public override double FindArea()
+    {
+        return 0.5 * Dimension1 * Dimension2;
+    }
+}
+public static class Computation
+{
+    public static int Compare(Shape shape1, Shape shape2)
+    {
+        double area1 = shape1.FindArea();
+        double area2 = shape2.FindArea();
+
+        if (area1 > area2)
+            return 1;
+        else if (area2 > area1)
+            return 2;
+        else
+            return 0;
+    }
+    public static void FindGreatest(Shape Circle, Shape Rectangle, Shape Triangle)
+    {
+        double area1 = Circle.FindArea();
+        double area2 = Rectangle.FindArea();
+        double area3 = Triangle.FindArea();
+        if (area1 > area2 && area1 > area3)
+        {
+            Console.WriteLine("Circle has the greatest area.");
+        }
+        else if (area2 > area1 && area2 > area3)
+        {
+            Console.WriteLine("Rectangle has the greatest area.");
+        }
+        else if (area3 > area1 && area3 > area2)
+        {
+            Console.WriteLine("Triangle has the greatest area.");
+        }
+        else
+        {
+            Console.WriteLine("Two or more shapes have the same greatest area.");
+        }
+    }
+}
+class Program
+{
+    static void Main(string[] args)
+    {
+        Shape circle = new Circle(5); // Radius of 5
+        Shape rectangle = new Rectangle(4, 6); // Length 4 and Width 6
+        Shape triangle = new Triangle(3, 4);
+         Console.WriteLine("Comparing Circle and Rectangle:");
+        int result = Computation.Compare(circle, rectangle);
+        Console.WriteLine(result);
+        Console.WriteLine("Finding shape with the greatest area:");
+        Computation.FindGreatest(circle, rectangle, triangle);
+    }
+} 
+
