@@ -1,17 +1,214 @@
-using System;
-class Interset{
-    static void Main(String[] args)
-     {
-        Console.WriteLine("Enter principal amount:");
-        double p = Convert.ToDouble(Console.ReadLine());
-        Console.WriteLine("Enter number of year");
-        double n = Convert.ToDouble(Console.ReadLine());
-        Console.WriteLine("Enter rate of interest");
-        double r = Convert.ToDouble(Console.ReadLine());
-        double si = p*n*r/100;
-        double ci = p * (Math.Pow((1 + r / 100),n))-p; 
-        Console.WriteLine("Simple Intersest: "+si);
-        Console.WriteLine("Compound Intersest: "+ci);
-     }
-}
 
+
+Ashuraj Herode
+ashuraj.herode@tssconsultancy.com
+11:20 AM GMT+5:30
+SPACE UPDATE:
+HISTORY IS ON
+Messages sent with history on are saved
+Today
+Ashuraj Herode
+,
+12:10 AM
+,
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Create an instance of EmployeeRepo
+        EmployeeRepo employeeRepo = new EmployeeRepo();
+
+        // Load employee data from file (if any)
+        string filePath = @"C:/Users/Ashuraj.Herode/Desktop/C sharp Problems/employees.txt";
+        employeeRepo.LoadFromFile(filePath);
+
+        // Example usage:
+        // Add new employee
+        Employee newEmployee = new Employee()
+        {
+            Id = 2,
+            Name = "Ashuraj Herode",
+            MobileNumber = "9876543210",
+            DateOfBirth = new DateTime(2002, 6, 28),
+            JobProfile = "Developer",
+            Department = "IT",
+            BusinessUnit = "Engineering",
+            DateOfJoining = DateTime.Now,
+            RM_Id = 100
+        };
+        employeeRepo.AddNewEmployee(newEmployee);
+
+        // Update mobile number of an employee
+        employeeRepo.UpdateMobileNumberOfEmployeeById(1, "987-654-3755");
+
+        // Get all employees by department
+        var itEmployees = employeeRepo.GetAllEmployeesByDepartment("IT");
+        Console.WriteLine("Employees in IT Department:");
+        foreach (var emp in itEmployees)
+        {
+            Console.WriteLine(emp);
+        }
+
+        // Save updated employee data to file
+        employeeRepo.SaveToFile(@"C:/Users/Ashuraj.Herode/Desktop/C sharp Problems/employees.txt");
+
+        // Optionally: Provide other functionalities as per the requirements
+
+        Console.WriteLine("Employee management operations completed.");
+    }
+}
+,12:10 AM,
+using System;
+
+public class Employee
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public string MobileNumber { get; set; }
+    public DateTime DateOfBirth { get; set; }
+    public string JobProfile { get; set; }
+    public string Department { get; set; }
+    public string BusinessUnit { get; set; }
+    public DateTime DateOfJoining { get; set; }
+    public int RM_Id { get; set; }
+
+    public override string ToString()
+    {
+        return $"Id: {Id}, Name: {Name}, Mobile: {MobileNumber}, DOB: {DateOfBirth.ToShortDateString()}, " +
+               $"Profile: {JobProfile}, Dept: {Department}, BU: {BusinessUnit}, " +
+               $"Joining Date: {DateOfJoining.ToShortDateString()}, RM Id: {RM_Id}";
+    }
+}
+,12:11 AM,
+You
+,
+12:13 AM
+,
+Thanks
+,12:13 AM,
+Ashuraj Herode
+,
+12:13 AM
+,
+soo sorry ha bhava
+,12:13 AM,
+ajun ahe jara baki ek min
+,12:13 AM,
+public class EmployeeRepo
+{
+    private List<Employee> employees;
+
+    public EmployeeRepo()
+    {
+        employees = new List<Employee>();
+    }
+
+    // Method to add a new employee
+    public void AddNewEmployee(Employee employee)
+    {
+        employees.Add(employee);
+    }
+
+    // Method to remove an employee by Id
+    public void RemoveEmployeeById(int id)
+    {
+        employees.RemoveAll(e => e.Id == id);
+    }
+
+    // Method to update mobile number of an employee by Id
+    public void UpdateMobileNumberOfEmployeeById(int id, string newMobileNumber)
+    {
+        var employee = employees.Find(e => e.Id == id);
+        if (employee != null)
+        {
+            employee.MobileNumber = newMobileNumber;
+        }
+        else
+        {
+            Console.WriteLine($"Employee with Id {id} not found.");
+        }
+    }
+
+    // Method to get all employees by department
+    public List<Employee> GetAllEmployeesByDepartment(string department)
+    {
+        return employees.FindAll(e => e.Department.Equals(department, StringComparison.OrdinalIgnoreCase));
+    }
+
+    // Method to get all employees by joining date range
+    public List<Employee> GetAllEmployeesByJoiningDateRange(DateTime startDate, DateTime endDate)
+    {
+        return employees.FindAll(e => e.DateOfJoining >= startDate && e.DateOfJoining <= endDate);
+    }
+
+    // Method to remove all employees by department
+    public void RemoveAllEmployeesByDepartment(string department)
+    {
+        employees.RemoveAll(e => e.Department.Equals(department, StringComparison.OrdinalIgnoreCase));
+    }
+
+    // Method to get all employees by RM_Id
+    public List<Employee> GetAllEmployeesByRM(int rmId)
+    {
+        return employees.FindAll(e => e.RM_Id == rmId);
+    }
+
+    // Method to get RM details by Employee Id
+    public Employee GetRMDetailsByEmployeeId(int employeeId)
+    {
+        var employee = employees.Find(e => e.Id == employeeId);
+        if (employee != null)
+        {
+            return employees.Find(e => e.Id == employee.RM_Id);
+        }
+        else
+        {
+            Console.WriteLine($"Employee with Id {employeeId} not found.");
+            return null;
+        }
+    }
+
+    // Method to save employee data to file
+    public void SaveToFile(string filePath)
+    {
+        using (StreamWriter writer = new StreamWriter(filePath))
+        {
+            foreach (var employee in employees)
+            {
+                writer.WriteLine($"{employee.Id},{employee.Name},{employee.MobileNumber},{employee.DateOfBirth.ToShortDateString()}," +
+                                 $"{employee.JobProfile},{employee.Department},{employee.BusinessUnit}," +
+                                 $"{employee.DateOfJoining.ToShortDateString()},{employee.RM_Id}");
+            }
+        }
+    }
+
+    // Method to load employee data from file
+    public void LoadFromFile(string filePath)
+    {
+        employees.Clear();
+        using (StreamReader reader = new StreamReader(filePath))
+        {
+            string line;
+            while ((line = reader.ReadLine()) != null)
+            {
+                string[] parts = line.Split(',');
+                if (parts.Length == 9)
+                {
+                    Employee employee = new Employee()
+                    {
+                        Id = int.Parse(parts[0]),
+                        Name = parts[1],
+                        MobileNumber = parts[2],
+                        DateOfBirth = DateTime.Parse(parts[3]),
+                        JobProfile = parts[4],
+                        Department = parts[5],
+                        BusinessUnit = parts[6],
+                        DateOfJoining = DateTime.Parse(parts[7]),
+                        RM_Id = int.Parse(parts[8])
+                    };
+                    employees.Add(employee);
+                }
+            }
+        }
+    }
+}
