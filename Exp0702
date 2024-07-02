@@ -1,0 +1,71 @@
+using System;
+class Palindrome{
+    public static bool IsPalindrome(int n)
+    {
+        string str = n.ToString();
+        int left = 0;
+        int right = str.Length - 1;
+        while (left < right)
+        {
+            if (str[left] != str[right])
+            {
+                return false;
+            }
+            left++;
+            right--;
+        }
+        return true;
+    }
+}
+class Program
+{
+    static void Main()
+    {
+        List<int>L = new List<int>();
+        List<int>Pal = new List<int>();
+        List<int>NonPal = new List<int>();
+        int n = Convert.ToInt32(Console.ReadLine());
+        string filepath="C:/Users/Sanchit.Gharge/Desktop/Experiments/file2.txt";
+        string pal="C:/Users/Sanchit.Gharge/Desktop/Experiments/pal.txt";
+        string nonpal="C:/Users/Sanchit.Gharge/Desktop/Experiments/nonpal.txt";
+        using( StreamWriter s = new StreamWriter(filepath))
+        {
+           for(int i=0;i<n;i++)
+           {
+            int val =Convert.ToInt32(Console.ReadLine());
+            s.WriteLine(val);
+            L.Add(val);
+           }
+        }
+        using( StreamReader s = new StreamReader(filepath))
+        {
+        string line;
+            while ((line = s.ReadLine()) != null)
+            {
+                if (int.TryParse(line, out int number))
+                {
+                    if(Palindrome.IsPalindrome(number))
+                    Pal.Add(number);
+                    else{
+                        NonPal.Add(number);
+                    }
+                }
+        }
+        }
+        using (StreamWriter s = new StreamWriter(pal))
+        {
+            foreach(int i in Pal)
+            {
+                s.WriteLine(i);
+            }
+        }
+        using (StreamWriter s = new StreamWriter(nonpal))
+        {
+            foreach(int i in NonPal)
+            {
+                s.WriteLine(i);
+            }
+        }
+
+}
+}

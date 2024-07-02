@@ -1,0 +1,71 @@
+using System;
+
+class Rev
+{
+    public static int ReverseNum(int n)
+    {
+        int reverse = 0;
+        while (n != 0)
+        {
+            int r = n % 10;
+            reverse = reverse * 10 + r;
+            n /= 10;
+        }
+        return reverse;
+    }
+
+}
+public class Palindrome
+{
+    public static bool IsPalindrome(int n)
+    {
+        int a = Rev.ReverseNum(n);
+        if (a == n)
+            return true;
+        else
+        {
+            return false;
+        }
+    }
+}
+public class Prime
+{
+    public static bool IsPrime(int n)
+    {
+        for (int i = 2; i < n; i++)
+        {
+            if (n % i == 0)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+class Exp
+{
+    public static void Main(String[] args)
+    {
+        Console.WriteLine("Enter n value");
+        int n = Convert.ToInt32(Console.ReadLine());
+        if (Palindrome.IsPalindrome(n))
+        {
+            Console.WriteLine($"Number is Palindrome");
+        }
+        else{
+            Console.WriteLine($"Number is not Palindrome");
+        }
+        if (Prime.IsPrime(n))
+        {
+            Console.WriteLine("Number is Prime");
+        }
+        else
+        {
+            Console.WriteLine("Number is not a Prime");
+        }
+    }
+}
+
+
+

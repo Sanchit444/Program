@@ -1,0 +1,31 @@
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        List<string>L = new List<string>();
+        string filepath="C:/Users/Sanchit.Gharge/Desktop/Experiments/file.txt";
+        using( StreamReader s = new StreamReader(filepath))
+        {
+        string line;
+        while ((line = s.ReadLine()) != null)
+        {
+            L.Add(line);
+        }
+        }
+        L.Sort();
+        using( StreamWriter s = new StreamWriter(filepath))
+        {
+            foreach(string str in L)
+            {
+                s.WriteLine(str);
+            }
+        }
+        Console.WriteLine("Sorted String");
+        foreach(string str in L)
+        {
+            Console.WriteLine(str);
+        }
+    }
+}

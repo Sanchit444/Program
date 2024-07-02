@@ -1,0 +1,24 @@
+using System;
+
+class Program
+{
+     Func<int,int,int>CalGcd=(a,b)=>
+    {
+        while(b!=0)
+        {
+            int t = b;
+           b = a%b;
+            a=t;
+          
+        }
+        return a;
+    };
+    static void Main(String[] args)
+    {
+       int a = Convert.ToInt32(Console.ReadLine());
+       int b = Convert.ToInt32(Console.ReadLine());
+     Console.WriteLine($"GCD: {CalGcd(a,b)}");
+
+    }
+
+}

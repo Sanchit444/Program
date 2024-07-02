@@ -1,0 +1,66 @@
+using System;
+public interface IVehicle
+{
+    void Start();
+    void Accelerate();
+    void Brake();
+}
+public class Car : IVehicle
+{
+    public void Start()
+    {
+        Console.WriteLine("Car started.");
+    }
+
+    public void Accelerate()
+    {
+        Console.WriteLine("Car is accelerating.");
+    }
+
+    public void Brake()
+    {
+        Console.WriteLine("Car is braking.");
+    }
+}
+public class Motorcycle : IVehicle
+{
+    public void Start()
+    {
+        Console.WriteLine("Motorcycle started.");
+    }
+
+    public void Accelerate()
+    {
+        Console.WriteLine("Motorcycle is accelerating.");
+    }
+
+    public void Brake()
+    {
+        Console.WriteLine("Motorcycle is braking.");
+    }
+}
+public class Action
+{
+   public static void PerformVehicleActions(IVehicle vehicle)
+    {
+        vehicle.Start();
+        vehicle.Accelerate();
+        vehicle.Brake();
+        Console.WriteLine();
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        IVehicle car = new Car();
+        IVehicle motorcycle = new Motorcycle();
+        Action.PerformVehicleActions(car);
+        Action.PerformVehicleActions(motorcycle);
+       
+    }
+
+    // Method to perform common actions on any IVehicle
+    
+}

@@ -1,0 +1,49 @@
+// Base class representing a taxpayer
+public abstract class Taxpayer
+{
+    public string Name { get; set; }
+    public abstract double CalculateTax();
+}
+public class Individual : Taxpayer
+{
+    public double Income { get; set; }
+    public override double CalculateTax()
+    {
+        return Income * 0.12;
+    }
+}
+
+// Derived class representing a company taxpayer
+public class Company : Taxpayer
+{
+    public double Revenue { get; set; }
+
+    public override double CalculateTax()
+    {
+        return Revenue * 0.30;
+    }
+}
+public class TaxCalculator
+{
+    public double CalculateTax(Taxpayer taxpayer)
+    {
+        return taxpayer.CalculateTax();
+    }
+}
+class Program
+{
+    static void Main(string[] args)
+    {
+        
+        Taxpayer individual = new Individual { Name = "John Doe", Income = 50000 };
+        Taxpayer company = new Company { Name = "ABC Inc.", Revenue = 1000000 };
+       
+        TaxCalculator taxCalculator = new TaxCalculator();
+
+        double individualTax = taxCalculator.CalculateTax(individual);
+        double companyTax = taxCalculator.CalculateTax(company);
+
+        Console.WriteLine($"Tax for {individual.Name}: {individualTax}");
+        Console.WriteLine($"Tax for {company.Name}: {companyTax}");
+    }
+}

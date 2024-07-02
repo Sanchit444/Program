@@ -1,0 +1,55 @@
+using System;
+public class Perfect{
+    public static bool IsPerfect(int num)
+    {
+         int sum = 0;
+        for (int i = 1; i < num; i++)
+        {
+            if (num % i == 0)
+            {
+                sum += i;
+            }
+        }
+        return sum == num;
+    }
+}
+public class Print
+{
+   public static void PrintEven()
+    {
+        for(int i=2;i<=500;i+=2)
+        {
+             Console.WriteLine($"Even number found: {i}");
+            Thread.Sleep(200);
+        }
+    }
+    public static void PrintPerfect()
+    {
+        for(int i=1;i<=10000;i++)
+        {
+            if(Perfect.IsPerfect(i))
+            {
+                Console.WriteLine($"Perfect Number: {i}");
+            }
+            Thread.Sleep(10);
+        }
+        
+    }
+}
+
+class Program
+{
+   
+    static void Main(String[] args)
+    {
+         Thread perfectThread = new Thread(Print.PrintPerfect);
+        Thread evenThread = new Thread(Print.PrintEven);
+
+        perfectThread.Start();
+        evenThread.Start();
+
+        perfectThread.Join();
+        evenThread.Join();
+    }
+
+}

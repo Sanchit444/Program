@@ -1,0 +1,60 @@
+using System;
+
+public class Car 
+{
+    public void Start()
+    {
+        Console.WriteLine("Car started.");
+    }
+
+    public void Accelerate()
+    {
+        Console.WriteLine("Car is accelerating.");
+    }
+
+    public void Brake()
+    {
+        Console.WriteLine("Car is braking.");
+    }
+}
+public class Motorcycle 
+{
+    public void Start()
+    {
+        Console.WriteLine("Motorcycle started.");
+    }
+
+    public void Accelerate()
+    {
+        Console.WriteLine("Motorcycle is accelerating.");
+    }
+
+    public void Brake()
+    {
+        Console.WriteLine("Motorcycle is braking.");
+    }
+}
+public class Action
+{
+   public static void PerformVehicleActions(Car vehicle)
+    {
+        vehicle.Start();
+        vehicle.Accelerate();
+        vehicle.Brake();
+        Console.WriteLine();
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Car car = new Car();
+        Motorcycle motorcycle = new Motorcycle();
+        Action.PerformVehicleActions(car);
+       
+    }
+
+    // Method to perform common actions on any IVehicle
+    
+}

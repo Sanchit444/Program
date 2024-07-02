@@ -1,0 +1,38 @@
+using System;
+
+class Valid
+{
+    public static bool IsValid(string s)
+    {
+        int c=0,v=0;
+        for(int i=0;i<s.Length;i++)
+        {
+            if(s[i]=='a' || s[i]=='e' || s[i] == 'i' || s[i] =='o' || s[i] =='u' )
+            {
+                v++;
+            }
+            else{
+                c++;
+            }
+        }
+        return c>v;
+    }
+    
+}
+class Program
+{
+   public delegate bool  IsValidDelegate(string s);
+    static void Main(String[] args)
+    {
+        IsValidDelegate isValidDelegate = Valid.IsValid;
+        string input1 = "hello";
+        string input2 = "world";
+        string input3 = "aeiou";
+        string input4 = "programming";
+        Console.WriteLine($"IsValid {input1} : {isValidDelegate(input1)}" );
+        Console.WriteLine($"IsValid {input2} : {isValidDelegate(input2)}" );
+        Console.WriteLine($"IsValid {input3} : {isValidDelegate(input3)}" );
+        Console.WriteLine($"IsValid {input4} : {isValidDelegate(input4)}" );
+    }
+
+}
