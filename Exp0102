@@ -6,15 +6,23 @@ CREATE TABLE Student (
     Location NVARCHAR(100) -- Location where the student resides
 );
 -- Create procedure to get count of students by marks range
-CREATE PROCEDURE Get_Count_By_Marks
-    @minMarks DECIMAL(5, 2),
-    @maxMarks DECIMAL(5, 2)
-AS
+DELIMITER //
+
+CREATE PROCEDURE Get_Count_By_Marks(
+    IN minMarks DECIMAL(5, 2),
+    IN maxMarks DECIMAL(5, 2)
+)
 BEGIN
     -- Query to fetch count of students by marks within the given range
     SELECT Marks, COUNT(*) AS "Number of Students"
     FROM Students
-    WHERE Marks BETWEEN @minMarks AND @maxMarks
+    WHERE Marks BETWEEN minMarks AND maxMarks
     GROUP BY Marks
     ORDER BY Marks DESC;
-END;
+END //
+
+DELIMITER ;
+
+CALL Get_Count_By_Marks(50.00, 90.00);
+
+
