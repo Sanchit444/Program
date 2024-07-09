@@ -41,6 +41,8 @@ END //
 DELIMITER ;
 
 CALL Get_Average_ByLocation("Vashi")    
-
+Create a procedure get_students_count which displays the number of students per 
+branch from the given location and between the given marks range 
+Execute the procedure for the location = 'Vashi' and marks between 75 to 85
 
 
