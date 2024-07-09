@@ -45,4 +45,23 @@ Create a procedure get_students_count which displays the number of students per
 branch from the given location and between the given marks range 
 Execute the procedure for the location = 'Vashi' and marks between 75 to 85
 
+DELIMITER //
 
+CREATE PROCEDURE Get_Students_Count(
+    IN loc VARCHAR(50),
+    IN minMarks DECIMAL(5, 2),
+    IN maxMarks DECIMAL(5, 2)
+)
+BEGIN
+  
+    SELECT Branch, COUNT(*) AS "Number of Students"
+    FROM Students
+    WHERE Location = loc
+      AND Marks BETWEEN minMarks AND maxMarks
+    GROUP BY Branch;
+END //
+
+DELIMITER ;
+
+
+call get_students_count("vashi",75,80)
