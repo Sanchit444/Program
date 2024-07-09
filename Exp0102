@@ -25,4 +25,22 @@ DELIMITER ;
 
 CALL Get_Count_By_Marks(50.00, 90.00);
 
+DELIMITER //
+
+CREATE PROCEDURE Get_Average_ByLocation(
+    IN loc VARCHAR(10)
+)
+BEGIN
+    -- Query to fetch the average marks of students by location
+    SELECT Location, AVG(Marks) AS "Average"
+    FROM Students
+    WHERE Location = loc
+    GROUP BY Location;
+END //
+
+DELIMITER ;
+
+CALL Get_Average_ByLocation("Vashi")    
+
+
 
